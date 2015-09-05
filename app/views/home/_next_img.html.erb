@@ -1,0 +1,24 @@
+<ul class="stock-photos-grid">
+    <% @medias_old.each do |media| %>
+      <li>
+          <%= link_to(image_tag(media.images.low_resolution.url),media.link,:target => "_blank") %>
+      </li>
+    <% end %>
+</ul>
+<% unless (@medias+@medias_old).size == 0 %>
+  <div id="next_page_<%= session[:max_id] %>">
+      <%= link_to("more", :action => 'next_page', :remote=>true, :max_id=>session[:max_id],:title=>session[:title]) %>
+  </div>
+<% end %>
+<script>
+<% if false %>
+    $(function () {
+        $("#next_page_<%= session[:max_id] %>").infinitescroll({
+            navSelector: "#next_page_<%= session[:max_id] %>",
+            nextSelector: "#next_page_<%= session[:max_id] %> a",
+            itemSelector: "#next_page_<%= session[:max_id] %> a",
+            dataType: "html"
+        });
+    });
+<% end %>
+</script>
